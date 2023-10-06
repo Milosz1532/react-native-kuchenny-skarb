@@ -59,6 +59,15 @@ const Api = {
 			throw error
 		}
 	},
+
+	getRecipeDetails: async id => {
+		try {
+			const response = await api.get('/lookup.php', { params: { i: id } })
+			return response.data.meals && response.data.meals[0]
+		} catch (error) {
+			throw error
+		}
+	},
 }
 
 export default Api

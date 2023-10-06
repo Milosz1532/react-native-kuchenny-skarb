@@ -15,6 +15,7 @@ import { primaryColor, borderColor } from '../assets/colors'
 import { globalStyles } from '../assets/styles'
 
 import Api from '../services/Api'
+import Header from '../components/Header'
 
 import RecipeCard from '../components/RecipeCard'
 import CategoryItem from '../components/CategoryItem'
@@ -60,82 +61,85 @@ export default function Search() {
 	}, [])
 
 	return (
-		<ScrollView style={globalStyles.container}>
-			<View style={{ paddingBottom: 20 }}>
-				<View style={styles.searchContainer}>
-					<TextInput
-						style={styles.searchInput}
-						placeholder='Wpisz wyszukiwaną frazę'
-						onChangeText={text => setSearchQuery(text)}
-						value={searchQuery}
-					/>
-					<TouchableOpacity>
-						<Ionicons name='search' size={24} color={primaryColor} style={styles.searchIcon} />
-					</TouchableOpacity>
+		<View>
+			<Header />
+			<ScrollView style={globalStyles.container}>
+				<View style={{ paddingBottom: 20 }}>
+					<View style={styles.searchContainer}>
+						<TextInput
+							style={styles.searchInput}
+							placeholder='Wpisz wyszukiwaną frazę'
+							onChangeText={text => setSearchQuery(text)}
+							value={searchQuery}
+						/>
+						<TouchableOpacity>
+							<Ionicons name='search' size={24} color={primaryColor} style={styles.searchIcon} />
+						</TouchableOpacity>
+					</View>
+
+					<View style={{ marginTop: 10 }}>
+						{randomRecipe && <RecipeCard recipe={randomRecipe} />}
+					</View>
+
+					{categoriesData && (
+						<>
+							<Text style={globalStyles.textTitle}>Categories</Text>
+							<FlatList
+								style={styles.categories}
+								horizontal
+								data={categoriesData}
+								keyExtractor={item => item.idCategory}
+								renderItem={({ item }) => (
+									<CategoryItem name={item.strCategory} image={item.strCategoryThumb} />
+								)}></FlatList>
+						</>
+					)}
+
+					{recipesList1 && (
+						<View style={{ marginTop: 20 }}>
+							<Text style={globalStyles.textTitle}>Seafood</Text>
+
+							<FlatList
+								style={styles.categories}
+								horizontal
+								data={recipesList1}
+								keyExtractor={item => item.idMeal}
+								renderItem={({ item }) => (
+									<RecipeSmallCard name={item.strMeal} image={item.strMealThumb} />
+								)}></FlatList>
+						</View>
+					)}
+					{recipesList2 && (
+						<View style={{ marginTop: 20 }}>
+							<Text style={globalStyles.textTitle}>Beef</Text>
+
+							<FlatList
+								style={styles.categories}
+								horizontal
+								data={recipesList2}
+								keyExtractor={item => item.idMeal}
+								renderItem={({ item }) => (
+									<RecipeSmallCard name={item.strMeal} image={item.strMealThumb} />
+								)}></FlatList>
+						</View>
+					)}
+					{recipesList3 && (
+						<View style={{ marginTop: 20 }}>
+							<Text style={globalStyles.textTitle}>Chicken</Text>
+
+							<FlatList
+								style={styles.categories}
+								horizontal
+								data={recipesList3}
+								keyExtractor={item => item.idMeal}
+								renderItem={({ item }) => (
+									<RecipeSmallCard name={item.strMeal} image={item.strMealThumb} />
+								)}></FlatList>
+						</View>
+					)}
 				</View>
-
-				<View style={{ marginTop: 10 }}>
-					{randomRecipe && <RecipeCard recipe={randomRecipe} />}
-				</View>
-
-				{categoriesData && (
-					<>
-						<Text style={globalStyles.textTitle}>Categories</Text>
-						<FlatList
-							style={styles.categories}
-							horizontal
-							data={categoriesData}
-							keyExtractor={item => item.idCategory}
-							renderItem={({ item }) => (
-								<CategoryItem name={item.strCategory} image={item.strCategoryThumb} />
-							)}></FlatList>
-					</>
-				)}
-
-				{recipesList1 && (
-					<View style={{ marginTop: 20 }}>
-						<Text style={globalStyles.textTitle}>Seafood</Text>
-
-						<FlatList
-							style={styles.categories}
-							horizontal
-							data={recipesList1}
-							keyExtractor={item => item.idMeal}
-							renderItem={({ item }) => (
-								<RecipeSmallCard name={item.strMeal} image={item.strMealThumb} />
-							)}></FlatList>
-					</View>
-				)}
-				{recipesList2 && (
-					<View style={{ marginTop: 20 }}>
-						<Text style={globalStyles.textTitle}>Beef</Text>
-
-						<FlatList
-							style={styles.categories}
-							horizontal
-							data={recipesList2}
-							keyExtractor={item => item.idMeal}
-							renderItem={({ item }) => (
-								<RecipeSmallCard name={item.strMeal} image={item.strMealThumb} />
-							)}></FlatList>
-					</View>
-				)}
-				{recipesList3 && (
-					<View style={{ marginTop: 20 }}>
-						<Text style={globalStyles.textTitle}>Chicken</Text>
-
-						<FlatList
-							style={styles.categories}
-							horizontal
-							data={recipesList3}
-							keyExtractor={item => item.idMeal}
-							renderItem={({ item }) => (
-								<RecipeSmallCard name={item.strMeal} image={item.strMealThumb} />
-							)}></FlatList>
-					</View>
-				)}
-			</View>
-		</ScrollView>
+			</ScrollView>
+		</View>
 	)
 }
 

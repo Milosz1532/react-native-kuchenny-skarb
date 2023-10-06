@@ -48,7 +48,7 @@ export default function Home() {
 		fetchItalianRecipes()
 	}, [])
 	return (
-		<SafeAreaView style={{ backgroundColor: '#fff' }}>
+		<View style={{ backgroundColor: '#fff' }}>
 			<View>
 				<Header />
 				<ScrollView style={globalStyles.container}>
@@ -79,6 +79,6 @@ export default function Home() {
 					</View>
 				</ScrollView>
 			</View>
-		</SafeAreaView>
+		</View>
 	)
 }

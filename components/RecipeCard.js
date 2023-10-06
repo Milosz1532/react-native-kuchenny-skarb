@@ -10,7 +10,7 @@ export default function RecipeCard({ recipe }) {
 	const { navigate } = useNavigation()
 
 	const handlePress = () => {
-		navigate('RecipeDetails', { recipe })
+		navigate('RecipeDetails', { id: recipe.idMeal })
 	}
 
 	return (
