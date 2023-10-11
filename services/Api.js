@@ -68,6 +68,14 @@ const Api = {
 			throw error
 		}
 	},
+	searchRecipes: async name => {
+		try {
+			const response = await api.get('/search.php', { params: { s: name } })
+			return response.data.meals
+		} catch (error) {
+			throw error
+		}
+	},
 }
 
 export default Api

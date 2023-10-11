@@ -6,34 +6,34 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { primaryColor } from '../assets/colors'
 import { useNavigation } from '@react-navigation/native'
 
-export default function RecipeCard({ recipe }) {
+export default function RecipeCard({ id, name, image, category, area }) {
 	const { navigate } = useNavigation()
 
 	const handlePress = () => {
-		navigate('RecipeDetails', { id: recipe.idMeal })
+		navigate('RecipeDetails', { id: id })
 	}
 
 	return (
 		<TouchableOpacity onPress={handlePress}>
 			<ImageBackground
-				source={{ uri: recipe.strMealThumb }}
+				source={{ uri: image }}
 				style={styles.cardContainer}
 				imageStyle={styles.cardImage}>
 				<View style={styles.overlay}>
 					<View style={styles.cardContext}>
 						<View style={styles.cardTop}>
-							{recipe.strCategory && (
+							{/* {category && (
 								<View style={styles.cardHeader}>
-									<Text style={styles.cardHeaderText}>{recipe.strCategory}</Text>
+									<Text style={styles.cardHeaderText}>{category}</Text>
 								</View>
-							)}
+							)} */}
 
-							<View>
+							<View style={styles.heart}>
 								<Ionicons name={'heart'} color={'tomato'} size={24} />
 							</View>
 						</View>
 						<View style={styles.cardBottom}>
-							<Text style={styles.cardTitle}>{recipe.strMeal}</Text>
+							<Text style={styles.cardTitle}>{name}</Text>
 							<View style={styles.cardBottomDetails}>
 								<View style={styles.detailsElement}>
 									<Ionicons name='timer-outline' size={24} color={primaryColor} />
@@ -43,11 +43,11 @@ export default function RecipeCard({ recipe }) {
 								</View>
 								<View style={styles.detailsElement}>
 									<MaterialCommunityIcons name='chef-hat' size={24} color={primaryColor} />
-									<Text style={styles.detailsElementText}>{recipe?.strArea}</Text>
+									<Text style={styles.detailsElementText}>{area ? area : ''}</Text>
 								</View>
 								<View style={styles.detailsElement}>
 									<Ionicons name='md-restaurant' size={24} color={primaryColor} />
-									<Text style={styles.detailsElementText}>{recipe.difficulty || 'Easy'}</Text>
+									<Text style={styles.detailsElementText}>{'Easy'}</Text>
 								</View>
 							</View>
 						</View>
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
 	cardTop: {
 		padding: 10,
 		borderRadius: 20,
-		justifyContent: 'space-between',
+		justifyContent: 'flex-end',
 		alignItems: 'center',
 		flexDirection: 'row',
 	},

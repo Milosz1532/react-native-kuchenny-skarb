@@ -1,32 +1,41 @@
-import { View, Text, ImageBackground, StyleSheet } from 'react-native'
+import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { primaryColor } from '../assets/colors'
 
-export default function RecipeSmallCard({ image, name }) {
+export default function RecipeSmallCard({ id, image, name }) {
+	const { navigate } = useNavigation()
+
+	const handlePress = () => {
+		navigate('RecipeDetails', { id: id })
+	}
+
 	return (
-		<ImageBackground
-			source={{
-				uri: image,
-			}}
-			style={styles.cardContainer}
-			imageStyle={styles.cardImage}>
-			<View style={styles.overlay}>
-				<View style={styles.cardContext}>
-					<View style={styles.cardTop}>
-						<View>
-							<Ionicons name={'heart'} color={'tomato'} size={24} />
+		<TouchableOpacity onPress={handlePress}>
+			<ImageBackground
+				source={{
+					uri: image,
+				}}
+				style={styles.cardContainer}
+				imageStyle={styles.cardImage}>
+				<View style={styles.overlay}>
+					<View style={styles.cardContext}>
+						<View style={styles.cardTop}>
+							<View>
+								<Ionicons name={'heart'} color={'tomato'} size={24} />
+							</View>
 						</View>
-					</View>
-					<View style={styles.cardBottom}>
-						<View style={styles.cardBottomDetails}>
-							<Text style={styles.title}>{name}</Text>
+						<View style={styles.cardBottom}>
+							<View style={styles.cardBottomDetails}>
+								<Text style={styles.title}>{name}</Text>
+							</View>
 						</View>
 					</View>
 				</View>
-			</View>
-		</ImageBackground>
+			</ImageBackground>
+		</TouchableOpacity>
 	)
 }
 

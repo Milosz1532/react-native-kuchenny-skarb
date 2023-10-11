@@ -2,10 +2,10 @@ import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
 import React from 'react'
 import { borderColor, primaryColor } from '../assets/colors'
 
-export default function Header() {
+export default function Header({ title, color }) {
 	return (
 		<View style={styles.headerContainer}>
-			<Text style={styles.appLogo}>Culinary Compass</Text>
+			<Text style={color ? styles.appLogo : styles.title}>{title}</Text>
 		</View>
 	)
 }
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		paddingBottom: 5,
 		borderBottomWidth: 1,
-		borderColor: borderColor,
+		borderColor: '#F4F4F4',
 	},
 
 	appLogo: {
@@ -26,5 +26,11 @@ const styles = StyleSheet.create({
 		color: primaryColor,
 		fontWeight: 'bold',
 		textAlign: 'center',
+	},
+
+	title: {
+		fontSize: 22,
+		textAlign: 'center',
+		fontWeight: '500',
 	},
 })
